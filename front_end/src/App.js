@@ -1,25 +1,50 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import Modal from './components/modal';
 
 class App extends Component {
+  state = {
+    modalOpen: false,
+  }
+
+  showModal = () => {
+    this.setState({ modalOpen: true });
+  };
+
+  hideModal = () => {
+    this.setState({ modalOpen: false });
+  };
+
   render() {
+    const { modalOpen } = this.state;
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+      <div>
+        <header>
+          <h1>User Account</h1>
         </header>
+        <main>
+          <div>
+            image
+          </div>
+          <div>
+            name
+          </div>
+          <div>
+            email
+          </div>
+          <div>
+            password
+          </div>
+          <button type="button" onClick={this.showModal}>
+            Update Account Info
+          </button>
+          <Modal modalOpen={modalOpen} handleClose={this.hideModal}>
+            <p>
+              Modal is open
+            </p>
+          </Modal>
+        </main>
       </div>
     );
   }
