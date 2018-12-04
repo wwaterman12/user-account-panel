@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import '../styles.css';
+
 class FormName extends Component {
   static propTypes = {
     onSubmit: PropTypes.func,
@@ -68,34 +70,38 @@ class FormName extends Component {
     const { firstName, lastName, formValid, firstNameError, lastNameError } = this.state;
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <label htmlFor="firstName">
-          First Name
-          <input
-            id="firstName"
-            type="text"
-            name="firstName"
-            value={firstName}
-            placeholder="New first name"
-            onChange={this.handleUserInput}
-            onBlur={this.handleUserInput}
-          />
-          {firstNameError && <p>{firstNameError}</p>}
-        </label>
-        <label htmlFor="lastName">
-          Last Name
-          <input
-            id="lastName"
-            type="text"
-            name="lastName"
-            value={lastName}
-            placeholder="New last name"
-            onChange={this.handleUserInput}
-            onBlur={this.handleUserInput}
-          />
-          {lastNameError && <p>{lastNameError}</p>}
-        </label>
-        <button type="submit" disabled={!formValid}>
+      <form id="nameForm" onSubmit={this.onSubmit}>
+        <div className="nameInputs">
+          <label htmlFor="firstName">
+            <p>New First Name</p>
+            <input
+              id="firstName"
+              className={firstNameError ? 'hasError' : ''}
+              type="text"
+              name="firstName"
+              value={firstName}
+              placeholder="New first name"
+              onChange={this.handleUserInput}
+              onBlur={this.handleUserInput}
+            />
+            <p className="errorText">{firstNameError}</p>
+          </label>
+          <label htmlFor="lastName">
+            <p>New Last Name</p>
+            <input
+              id="lastName"
+              className={lastNameError ? 'hasError' : ''}
+              type="text"
+              name="lastName"
+              value={lastName}
+              placeholder="New last name"
+              onChange={this.handleUserInput}
+              onBlur={this.handleUserInput}
+            />
+            <p className="errorText">{lastNameError}</p>
+          </label>
+        </div>
+        <button className="submit" type="submit" disabled={!formValid}>
           Update Name
         </button>
       </form>

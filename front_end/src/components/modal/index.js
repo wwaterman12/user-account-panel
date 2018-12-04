@@ -7,7 +7,7 @@ const Modal = ({ handleClose, modalOpen, children }) => (
   <div className={modalOpen ? 'modal open' : 'modal closed'}>
     <section className="modal-main">
       {children}
-      <button type="button" onClick={handleClose}>close</button>
+      <button className="close-btn" type="button" onClick={handleClose}>X</button>
     </section>
   </div>
 );

@@ -1,0 +1,20 @@
+.imageWrapper {
+  text-align: center;
+}
+
+.imageWrapper h2 {
+  margin-top: 10px;
+}
+
+.imageWrapper img {
+  border-radius: 100%;
+  border: solid 1px #fff;
+  height: 200px;
+  width: 200px;
+}
+
+@media (max-width: 768px) {
+  .imageWrapper {
+    margin-bottom: 20px;
+  }
+}

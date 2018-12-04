@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import zxcvbn from 'zxcvbn';
 
+import '../styles.css';
+
 class FormPassword extends Component {
   static propTypes = {
     onSubmit: PropTypes.func,
@@ -68,27 +70,28 @@ class FormPassword extends Component {
     const { password, formValid, passwordError, isChecked } = this.state;
 
     return (
-      <form onSubmit={this.onSubmit}>
+      <form id="passwordForm" onSubmit={this.onSubmit}>
         <label htmlFor="password">
-          password
+          <p>New Password</p>
           <input
             id="password"
+            className={passwordError && !formValid ? 'hasError' : ''}
             type={isChecked ? 'text' : 'password'}
             name="password"
             value={password}
-            placeholder="New first name"
+            placeholder="Enter new password"
             onChange={this.handleUserInput}
             onBlur={this.handleUserInput}
           />
-          {passwordError && <p>{passwordError}</p>}
+          <p className={formValid ? 'validText' : 'errorText'}>{passwordError}</p>
         </label>
         <input
           type="checkbox"
           value={isChecked}
           onChange={this.handleUserCheck}
         />
-        <span>Show Password</span>
-        <button type="submit" disabled={!formValid}>
+        <span className="showPassword">Show Password</span>
+        <button className="submit" type="submit" disabled={!formValid}>
           Update Password
         </button>
       </form>

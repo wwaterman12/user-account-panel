@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import '../styles.css';
+
 class FormEmail extends Component {
   static propTypes = {
     onSubmit: PropTypes.func,
@@ -42,21 +44,22 @@ class FormEmail extends Component {
     const { email, formValid, emailError } = this.state;
 
     return (
-      <form onSubmit={this.onSubmit}>
+      <form id="emailForm" onSubmit={this.onSubmit}>
         <label htmlFor="email">
-          Email
+          <p>New Email</p>
           <input
             id="email"
+            className={emailError ? 'hasError' : ''}
             type="email"
             name="email"
             value={email}
-            placeholder="New first name"
+            placeholder="New email address"
             onChange={this.handleUserInput}
             onBlur={this.handleUserInput}
           />
-          {emailError && <p>{emailError}</p>}
+          <p className="errorText">{emailError}</p>
         </label>
-        <button type="submit" disabled={!formValid}>
+        <button className="submit" type="submit" disabled={!formValid}>
           Update Email
         </button>
       </form>

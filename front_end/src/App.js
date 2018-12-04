@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import md5 from 'js-md5';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 
+import Header from './components/header';
+import UserImage from './components/image';
 import Modal from './components/modal';
 import FormName from './components/forms/name';
 import FormEmail from './components/forms/email';
 import FormPassword from './components/forms/password';
+
+import './styles.css';
 
 class App extends Component {
   state = {
@@ -59,49 +62,47 @@ class App extends Component {
 
   render() {
     const { modalOpen, firstName, lastName, email, password } = this.state;
-    const defaultImage = encodeURI('https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg');
 
     return (
       <div>
-        <header>
-          <h1>User Account</h1>
-        </header>
-        <main>
-          <div>
-            <img
-              src={`https://www.gravatar.com/avatar/${md5(email).trim()}?s=200&d=${defaultImage}`}
-              alt="User Profile"
-            />
+        <Header />
+        <main className="main-content">
+          <UserImage email={email} firstName={firstName} lastName={lastName} />
+          <div className="user-info">
+            <div>
+              <p className="user-info-text">
+                <span>Full Name:</span>
+                {`${firstName} ${lastName}`}
+              </p>
+              <button type="button" onClick={() => this.showModal('name')}>
+                <FontAwesomeIcon icon={faUserEdit} />
+                &nbsp;EDIT
+              </button>
+            </div>
+            <div>
+              <p className="user-info-text">
+                <span>Email:</span>
+                {email}
+              </p>
+              <button type="button" onClick={() => this.showModal('email')}>
+                <FontAwesomeIcon icon={faUserEdit} />
+                &nbsp;EDIT
+              </button>
+            </div>
+            <div>
+              <p className="user-info-text">
+                <span>Password:</span>
+                {password.split('').map(() => ('*'))}
+              </p>
+              <button type="button" onClick={() => this.showModal('password')}>
+                <FontAwesomeIcon icon={faUserEdit} />
+                &nbsp;EDIT
+              </button>
+            </div>
+            <Modal modalOpen={modalOpen} handleClose={this.hideModal}>
+              {this.renderForm()}
+            </Modal>
           </div>
-          <div>
-            <p>
-              Full Name:
-              <span>{`${firstName} ${lastName}`}</span>
-            </p>
-            <button type="button" onClick={() => this.showModal('name')}>
-              <FontAwesomeIcon icon={faUserEdit} />
-              EDIT
-            </button>
-          </div>
-          <div>
-            Email:
-            <span>{email}</span>
-            <button type="button" onClick={() => this.showModal('email')}>
-              <FontAwesomeIcon icon={faUserEdit} />
-              EDIT
-            </button>
-          </div>
-          <div>
-            Password:
-            <span>{password.split('').map(() => ('*'))}</span>
-            <button type="button" onClick={() => this.showModal('password')}>
-              <FontAwesomeIcon icon={faUserEdit} />
-              EDIT
-            </button>
-          </div>
-          <Modal modalOpen={modalOpen} handleClose={this.hideModal}>
-            {this.renderForm()}
-          </Modal>
         </main>
       </div>
     );
