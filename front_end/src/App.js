@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import md5 from 'js-md5';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 
@@ -58,6 +59,7 @@ class App extends Component {
 
   render() {
     const { modalOpen, firstName, lastName, email, password } = this.state;
+    const defaultImage = encodeURI('https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg');
 
     return (
       <div>
@@ -66,7 +68,10 @@ class App extends Component {
         </header>
         <main>
           <div>
-            image
+            <img
+              src={`https://www.gravatar.com/avatar/${md5(email).trim()}?s=200&d=${defaultImage}`}
+              alt="User Profile"
+            />
           </div>
           <div>
             <p>
