@@ -17,13 +17,33 @@ class App extends Component {
     form: '',
   }
 
+  componentDidMount() {
+    this.hydrateStateWithLocalStorage();
+  }
+
   showModal = (form) => {
     this.setState({ modalOpen: true, form });
   };
 
   hideModal = () => {
     this.setState({ modalOpen: false });
+
+    this.hydrateStateWithLocalStorage();
   };
+
+  hydrateStateWithLocalStorage() {
+    ['firstName', 'lastName', 'email', 'password'].forEach((key) => {
+      if (Object.prototype.hasOwnProperty.call(localStorage, key)) {
+        let value = localStorage.getItem(key);
+        try {
+          value = JSON.parse(value);
+          this.setState({ [key]: value });
+        } catch (e) {
+          this.setState({ [key]: value });
+        }
+      }
+    });
+  }
 
   renderForm() {
     const { form } = this.state;
