@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 
 import Modal from './components/modal';
 
 class App extends Component {
   state = {
     modalOpen: false,
+    firstName: 'Wesley',
+    lastName: 'Waterman',
+    email: 'wwaterman12@gmail.com',
+    password: 'User*667386!',
   }
 
   showModal = () => {
@@ -16,7 +22,7 @@ class App extends Component {
   };
 
   render() {
-    const { modalOpen } = this.state;
+    const { modalOpen, firstName, lastName, email, password } = this.state;
 
     return (
       <div>
@@ -28,17 +34,31 @@ class App extends Component {
             image
           </div>
           <div>
-            name
+            <p>
+              Full Name:
+              <span>{`${firstName} ${lastName}`}</span>
+            </p>
+            <button type="button" onClick={this.showModal}>
+              <FontAwesomeIcon icon={faUserEdit} />
+              EDIT
+            </button>
           </div>
           <div>
-            email
+            Email:
+            <span>{email}</span>
+            <button type="button" onClick={this.showModal}>
+              <FontAwesomeIcon icon={faUserEdit} />
+              EDIT
+            </button>
           </div>
           <div>
-            password
+            Password:
+            <span>{password.split('').map(() => ('*'))}</span>
+            <button type="button" onClick={this.showModal}>
+              <FontAwesomeIcon icon={faUserEdit} />
+              EDIT
+            </button>
           </div>
-          <button type="button" onClick={this.showModal}>
-            Update Account Info
-          </button>
           <Modal modalOpen={modalOpen} handleClose={this.hideModal}>
             <p>
               Modal is open
