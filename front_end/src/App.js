@@ -3,6 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 
 import Modal from './components/modal';
+import FormName from './components/forms/name';
+import FormEmail from './components/forms/email';
+import FormPassword from './components/forms/password';
 
 class App extends Component {
   state = {
@@ -11,15 +14,27 @@ class App extends Component {
     lastName: 'Waterman',
     email: 'wwaterman12@gmail.com',
     password: 'User*667386!',
+    form: '',
   }
 
-  showModal = () => {
-    this.setState({ modalOpen: true });
+  showModal = (form) => {
+    this.setState({ modalOpen: true, form });
   };
 
   hideModal = () => {
     this.setState({ modalOpen: false });
   };
+
+  renderForm() {
+    const { form } = this.state;
+
+    switch (form) {
+      case 'name': return <FormName onSubmit={this.hideModal} />;
+      case 'email': return <FormEmail onSubmit={this.hideModal} />;
+      case 'password': return <FormPassword onSubmit={this.hideModal} />;
+      default: return null;
+    }
+  }
 
   render() {
     const { modalOpen, firstName, lastName, email, password } = this.state;
@@ -38,7 +53,7 @@ class App extends Component {
               Full Name:
               <span>{`${firstName} ${lastName}`}</span>
             </p>
-            <button type="button" onClick={this.showModal}>
+            <button type="button" onClick={() => this.showModal('name')}>
               <FontAwesomeIcon icon={faUserEdit} />
               EDIT
             </button>
@@ -46,7 +61,7 @@ class App extends Component {
           <div>
             Email:
             <span>{email}</span>
-            <button type="button" onClick={this.showModal}>
+            <button type="button" onClick={() => this.showModal('email')}>
               <FontAwesomeIcon icon={faUserEdit} />
               EDIT
             </button>
@@ -54,15 +69,13 @@ class App extends Component {
           <div>
             Password:
             <span>{password.split('').map(() => ('*'))}</span>
-            <button type="button" onClick={this.showModal}>
+            <button type="button" onClick={() => this.showModal('password')}>
               <FontAwesomeIcon icon={faUserEdit} />
               EDIT
             </button>
           </div>
           <Modal modalOpen={modalOpen} handleClose={this.hideModal}>
-            <p>
-              Modal is open
-            </p>
+            {this.renderForm()}
           </Modal>
         </main>
       </div>
