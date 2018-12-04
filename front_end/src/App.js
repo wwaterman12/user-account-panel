@@ -13,7 +13,7 @@ class App extends Component {
     firstName: 'Wesley',
     lastName: 'Waterman',
     email: 'wwaterman12@gmail.com',
-    password: 'User*667386!',
+    password: 'changeme*66',
     form: '',
   }
 

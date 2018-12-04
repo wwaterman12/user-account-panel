@@ -11,6 +11,7 @@ class FormPassword extends Component {
     password: '',
     passwordError: '',
     formValid: false,
+    isChecked: false,
   }
 
   onSubmit = (event) => {
@@ -21,6 +22,12 @@ class FormPassword extends Component {
     localStorage.setItem('password', password);
 
     onSubmit();
+  }
+
+  handleUserCheck = () => {
+    const { isChecked } = this.state;
+
+    this.setState({ isChecked: !isChecked });
   }
 
   handleUserInput = (event) => {
@@ -36,10 +43,10 @@ class FormPassword extends Component {
 
     switch (result.score.toString()) {
       case '0':
-        passwordError = 'Password is too weak';
+        passwordError = 'Password is very weak';
         break;
       case '1':
-        passwordError = 'Password is a little stronger but still too weak';
+        passwordError = 'Password is weak';
         break;
       case '2':
         passwordError = 'password is ok';
@@ -58,7 +65,7 @@ class FormPassword extends Component {
   }
 
   render() {
-    const { password, formValid, passwordError } = this.state;
+    const { password, formValid, passwordError, isChecked } = this.state;
 
     return (
       <form onSubmit={this.onSubmit}>
@@ -66,7 +73,7 @@ class FormPassword extends Component {
           password
           <input
             id="password"
-            type="password"
+            type={isChecked ? 'text' : 'password'}
             name="password"
             value={password}
             placeholder="New first name"
@@ -75,6 +82,12 @@ class FormPassword extends Component {
           />
           {passwordError && <p>{passwordError}</p>}
         </label>
+        <input
+          type="checkbox"
+          value={isChecked}
+          onChange={this.handleUserCheck}
+        />
+        <span>Show Password</span>
         <button type="submit" disabled={!formValid}>
           Update Password
         </button>
