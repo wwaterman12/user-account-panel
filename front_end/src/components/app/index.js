@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 
-import Header from './components/header';
-import UserImage from './components/image';
-import Modal from './components/modal';
-import FormName from './components/forms/name';
-import FormEmail from './components/forms/email';
-import FormPassword from './components/forms/password';
+import Header from '../header';
+import UserImage from '../image';
+import Modal from '../modal';
+import FormName from '../forms/name';
+import FormEmail from '../forms/email';
+import FormPassword from '../forms/password';
 
 import './styles.css';
 
