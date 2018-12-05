@@ -51,13 +51,13 @@ class FormPassword extends Component {
         passwordError = 'Password is weak';
         break;
       case '2':
-        passwordError = 'password is ok';
+        passwordError = 'Password is ok';
         break;
       case '3':
-        passwordError = 'password is strong';
+        passwordError = 'Password is strong';
         break;
       case '4':
-        passwordError = 'password is very strong';
+        passwordError = 'Password is very strong';
         break;
       default:
         break;
