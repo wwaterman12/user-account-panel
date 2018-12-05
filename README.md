@@ -18,5 +18,7 @@ navigate to `localhost:3000`
 - [enzyme](https://github.com/airbnb/enzyme) and [chai](https://www.chaijs.com/) for testing
 - [font-awesome](https://fontawesome.com/) for icons
 
+See Versions of dependencies used in `front_end/package.json`
+
 
 ### See the live version [here](https://wwaterman12.github.io/user-account-panel/)
